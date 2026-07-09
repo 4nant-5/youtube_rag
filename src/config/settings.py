@@ -10,6 +10,7 @@ CHROMA_DB_DIR = DATA_DIR / "chroma_db"
 
 # Models
 EMBEDDING_MODEL = "BAAI/bge-large-en-v1.5"
+DEVICE = "cpu"
 RERANKER_MODEL = "BAAI/bge-reranker-large"
 LLM_MODEL = "Qwen/Qwen2.5-7B-Instruct"
 VISION_MODEL = "Qwen/Qwen2.5-VL-7B-Instruct"
