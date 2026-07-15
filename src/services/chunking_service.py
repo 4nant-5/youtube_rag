@@ -2,7 +2,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
 class ChunkService:
-    """Service responsible for splitting LangChain documents."""
+    """Service responsible for splitting LangChain Documents."""
 
     def __init__(
         self,
@@ -15,6 +15,14 @@ class ChunkService:
             chunk_overlap=chunk_overlap,
         )
 
-    def split_documents(self, document):
+    def split_documents(self, documents):
 
-        return self.text_splitter.split_documents([document])
+        chunks = self.text_splitter.split_documents(documents)
+
+        for index, chunk in enumerate(chunks):
+
+            video_id = chunk.metadata["video_id"]
+
+            chunk.metadata["chunk_id"] = f"{video_id}_{index}"
+
+        return chunks

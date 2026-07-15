@@ -6,8 +6,8 @@ DATA_DIR = PROJECT_ROOT / "data"
 VIDEOS_DIR = DATA_DIR / "videos"
 TRANSCRIPTS_DIR = DATA_DIR / "transcripts"
 FRAMES_DIR = DATA_DIR / "frames"
-CHROMA_DB_DIR = DATA_DIR / "chroma_db"
-
+CHROMA_DB_PATH = DATA_DIR / "chroma_db"
+COLLECTION_NAME = "youtube_rag"
 # Models
 EMBEDDING_MODEL = "BAAI/bge-large-en-v1.5"
 DEVICE = "cpu"
