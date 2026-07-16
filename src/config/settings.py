@@ -12,7 +12,8 @@ COLLECTION_NAME = "youtube_rag"
 EMBEDDING_MODEL = "BAAI/bge-large-en-v1.5"
 DEVICE = "cpu"
 RERANKER_MODEL = "BAAI/bge-reranker-large"
-LLM_MODEL = "Qwen/Qwen2.5-7B-Instruct"
+OLLAMA_MODEL = "qwen3:8b"
+OLLAMA_BASE_URL = "http://localhost:11434"
 VISION_MODEL = "Qwen/Qwen2.5-VL-7B-Instruct"
 
 # Chunking
