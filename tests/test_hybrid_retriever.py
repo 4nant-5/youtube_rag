@@ -4,6 +4,11 @@ from pathlib import Path
 # Ensure project root is on sys.path so `src` package is importable when
 # running the test as a script: `python tests/test_youtube_service.py`
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from src.services.youtube_service import YouTubeService
+
+# Ensure project root is on sys.path so `src` package is importable when
+# running the test as a script: `python tests/test_youtube_service.py`
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from src.retrievers.dense_retriever import DenseRetriever
 from src.retrievers.bm25_retriever import BM25Retriever
 from src.retrievers.hybrid_retriever import HybridRetriever
@@ -21,6 +26,8 @@ def main():
         embedding_service.get_embedding_model()
     )
 
+    chroma_service.debug_list_videos()
+
     whoosh_service = WhooshService()
 
     dense = DenseRetriever(chroma_service)
@@ -32,7 +39,9 @@ def main():
         bm25,
     )
 
-    video_id = "https://www.youtube.com/watch?v=UPtG_38Oq8o"
+    url = "https://www.youtube.com/watch?v=UPtG_38Oq8o"
+
+    video_id = YouTubeService.extract_video_id(url)
 
     query = "What is attention?"
 

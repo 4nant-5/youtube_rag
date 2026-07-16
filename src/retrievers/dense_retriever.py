@@ -1,7 +1,8 @@
 from src.services.chroma_service import ChromaService
+from src.retrievers.base_retriever import BaseRetriever
 
 
-class DenseRetriever:
+class DenseRetriever(BaseRetriever):
 
     def __init__(self, chroma_service: ChromaService):
         self.vector_store = chroma_service.get_vector_store()

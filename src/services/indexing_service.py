@@ -26,10 +26,32 @@ class IndexingService:
 
         return self.chroma_service.get_indexed_chunk_count(video_id)
 
+    # def index_documents(
+    #     self,
+    #     chunks: list[Document],
+    # ):
+
+    #     self.chroma_service.add_documents(chunks)
+
+    #     self.whoosh_service.add_documents(chunks)
+
     def index_documents(
-        self,
-        chunks: list[Document],
-    ):
+    self,
+    chunks: list[Document],
+):
+
+        print("=" * 80)
+        print("FIRST DOCUMENT BEFORE INDEXING")
+        print("=" * 80)
+
+        print(chunks[0])
+
+        print()
+
+        print("Metadata:")
+        print(chunks[0].metadata)
+
+        print("=" * 80)
 
         self.chroma_service.add_documents(chunks)
 

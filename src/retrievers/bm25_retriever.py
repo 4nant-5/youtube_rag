@@ -1,9 +1,10 @@
 from langchain_core.documents import Document
+from src.retrievers.base_retriever import BaseRetriever
 
 from src.services.whoosh_service import WhooshService
 
 
-class BM25Retriever:
+class BM25Retriever(BaseRetriever):
     """
     Lexical retriever backed by Whoosh.
     """

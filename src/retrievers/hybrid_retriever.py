@@ -1,10 +1,14 @@
 from langchain_core.documents import Document
 
+from src.retrievers.base_retriever import BaseRetriever
 from src.retrievers.dense_retriever import DenseRetriever
 from src.retrievers.bm25_retriever import BM25Retriever
 
 
-class HybridRetriever:
+class HybridRetriever(BaseRetriever):
+    """
+    Combines Dense Retrieval and BM25 Retrieval.
+    """
 
     def __init__(
         self,
@@ -30,16 +34,18 @@ class HybridRetriever:
 
         bm25_results = self.bm25_retriever.retrieve(
             query=query,
+            video_id=video_id,
             k=k,
         )
 
-        merged = {}
+        merged_documents = {}
 
         for document in dense_results + bm25_results:
 
             chunk_id = document.metadata["chunk_id"]
 
-            if chunk_id not in merged:
-                merged[chunk_id] = document
+            if chunk_id not in merged_documents:
 
-        return list(merged.values())
+                merged_documents[chunk_id] = document
+
+        return list(merged_documents.values())
