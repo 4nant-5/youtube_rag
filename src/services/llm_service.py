@@ -13,15 +13,13 @@ class LLMService:
 
     def __init__(self):
 
-        print("Loading LLM...")
-
         self.llm = ChatOllama(
             model=OLLAMA_MODEL,
             base_url=OLLAMA_BASE_URL,
             temperature=0,
         )
 
-        print("LLM loaded successfully!")
+        print("LLM loaded")
 
     def generate(
         self,
