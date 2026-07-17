@@ -1,14 +1,14 @@
 from langchain_ollama import ChatOllama
 
 from src.config.settings import (
-    OLLAMA_MODEL,
     OLLAMA_BASE_URL,
+    OLLAMA_MODEL,
 )
 
 
 class LLMService:
     """
-    Service responsible for interacting with the LLM.
+    Handles all communication with the language model.
     """
 
     def __init__(self):
@@ -19,12 +19,15 @@ class LLMService:
             temperature=0,
         )
 
-        print("LLM loaded")
+        print("Language model loaded successfully.")
 
     def generate(
         self,
         prompt: str,
     ) -> str:
+        """
+        Generate a response from the LLM.
+        """
 
         response = self.llm.invoke(prompt)
 

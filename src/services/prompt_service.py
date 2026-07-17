@@ -11,6 +11,7 @@ class PromptService:
         self,
         question: str,
         documents: list[Document],
+        response_language: str,
     ) -> str:
 
         context = ""
@@ -45,7 +46,9 @@ Rules:
 4. Keep the answer concise but complete.
 5. If appropriate, mention the timestamp(s) where the information appears.
 6. Do not mention that you are using chunks or retrieved documents.
-7. Answer in clear natural language.
+7. Answer in {response_language}.
+8. Preserve technical terms when necessary.
+9. If the user asks in another language, still answer in {response_language}.
 
 ==================================================
 VIDEO CONTEXT
