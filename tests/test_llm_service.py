@@ -10,14 +10,16 @@ def main():
 
     llm_service = LLMService()
 
-    question = "What is Artificial Intelligence?"
+    prompt = """
+    Explain Artificial Intelligence in two sentences.
+    """
 
-    answer = llm_service.generate(question)
+    answer = llm_service.generate(prompt)
 
     print("=" * 80)
-    print("QUESTION")
+    print("PROMPT")
     print("=" * 80)
-    print(question)
+    print(prompt)
 
     print()
 
