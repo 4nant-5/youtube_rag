@@ -12,7 +12,8 @@ def render():
     if not st.session_state.get("video_indexed", False):
         st.info("📹 Please index a YouTube video before asking questions.")
     question = st.text_area(
-        label="",
+        label="Question",
+        label_visibility="collapsed",
         placeholder=(
             "Example:\n"
             "• Summarize this lecture\n"

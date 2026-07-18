@@ -1,7 +1,11 @@
+import logging
+
 from langchain_core.documents import Document
 
 from src.services.chroma_service import ChromaService
 from src.services.whoosh_service import WhooshService
+
+logger = logging.getLogger(__name__)
 
 
 class IndexingService:
@@ -36,23 +40,24 @@ class IndexingService:
     #     self.whoosh_service.add_documents(chunks)
 
     def index_documents(
-    self,
-    chunks: list[Document],
-):
+        self,
+        chunks: list[Document],
+    ):
 
-        print("=" * 80)
-        print("FIRST DOCUMENT BEFORE INDEXING")
-        print("=" * 80)
+        if not chunks:
+            logger.warning("index_documents called with empty chunk list")
+            return
 
-        print(chunks[0])
+        logger.info("Indexing %d chunks (first chunk metadata: %s)", len(chunks), chunks[0].metadata)
 
-        print()
+        try:
+            self.chroma_service.add_documents(chunks)
+        except Exception as exc:
+            logger.exception("Chroma indexing failed: %s", exc)
+            raise
 
-        print("Metadata:")
-        print(chunks[0].metadata)
-
-        print("=" * 80)
-
-        self.chroma_service.add_documents(chunks)
-
-        self.whoosh_service.add_documents(chunks)
+        try:
+            self.whoosh_service.add_documents(chunks)
+        except Exception as exc:
+            logger.exception("Whoosh indexing failed: %s", exc)
+            raise

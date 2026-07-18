@@ -1,0 +1,300 @@
+
+=== test_bm25_retriever.py ===
+================================================================================
+Retrieved 0 chunks
+================================================================================
+
+=== test_chroma_service.py ===
+Traceback (most recent call last):
+  File "C:\Users\anant\Desktop\projects\youtube_rag\tests\test_chroma_service.py", line 64, in <module>
+    main()
+  File "C:\Users\anant\Desktop\projects\youtube_rag\tests\test_chroma_service.py", line 19, in main
+    embedding_service.get_embedding_model()
+    ^^^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'embedding_service' where it is not associated with a value
+
+=== test_chunking_service.py ===
+Total Chunks: 98
+
+Traceback (most recent call last):
+  File "C:\Users\anant\Desktop\projects\youtube_rag\tests\test_chunking_service.py", line 45, in <module>
+    main()
+  File "C:\Users\anant\Desktop\projects\youtube_rag\tests\test_chunking_service.py", line 37, in main
+    print(chunks[0].page_content[:500])
+  File "C:\Users\anant\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 0-2: character maps to <undefined>
+
+=== test_dense_retriever.py ===
+Traceback (most recent call last):
+  File "C:\Users\anant\Desktop\projects\youtube_rag\tests\test_dense_retriever.py", line 68, in <module>
+    main()
+  File "C:\Users\anant\Desktop\projects\youtube_rag\tests\test_dense_retriever.py", line 26, in main
+    document = DocumentService.transcript_to_document(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'DocumentService' has no attribute 'transcript_to_document'. Did you mean: 'transcript_to_documents'?
+
+=== test_document_service.py ===
+Traceback (most recent call last):
+  File "C:\Users\anant\Desktop\projects\youtube_rag\src\services\transcript_service.py", line 12, in get_transcript
+    transcript_list = api.list(video_id)
+                      ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\youtube_transcript_api\_api.py", line 127, in list
+    return self._fetcher.fetch(video_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\youtube_transcript_api\_transcripts.py", line 356, in fetch
+    self._fetch_captions_json(video_id),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\youtube_transcript_api\_transcripts.py", line 364, in _fetch_captions_json
+    return self._extract_captions_json(innertube_data, video_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\youtube_transcript_api\_transcripts.py", line 385, in _extract_captions_json
+    self._assert_playability(innertube_data.get("playabilityStatus"), video_id)
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\youtube_transcript_api\_transcripts.py", line 411, in _assert_playability
+    if video_id.startswith("http://") or video_id.startswith("https://"):
+       ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'startswith'
+System.Management.Automation.RemoteException
+The above exception was the direct cause of the following exception:
+System.Management.Automation.RemoteException
+Traceback (most recent call last):
+  File "C:\Users\anant\Desktop\projects\youtube_rag\tests\test_document_service.py", line 30, in <module>
+    main()
+  File "C:\Users\anant\Desktop\projects\youtube_rag\tests\test_document_service.py", line 16, in main
+    transcript_data = TranscriptService.get_transcript(video_id)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\src\services\transcript_service.py", line 32, in get_transcript
+    raise RuntimeError(f"Transcript unavailable for video {video_id}: {exc}") from exc
+RuntimeError: Transcript unavailable for video None: 'NoneType' object has no attribute 'startswith'
+
+=== test_embedding_service.py ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+System.Management.Automation.RemoteException
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights:  73%|#######3  | 287/391 [00:00<00:00, 2847.34it/s]
+Loading weights: 100%|##########| 391/391 [00:00<00:00, 2968.70it/s]
+Embedding Dimension: 1024
+
+[-0.014554768800735474, 0.011244089342653751, -0.004229192156344652, -0.0007707938202656806, -0.023606156930327415, -0.03623634949326515, -0.015036230906844139, -0.015054117888212204, 0.016002828255295753, 0.007428013253957033]
+
+=== test_hybrid_reranker.py ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+System.Management.Automation.RemoteException
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 391/391 [00:00<00:00, 5124.42it/s]
+================================================================================
+VIDEOS STORED IN CHROMA
+================================================================================
+UPtG_38Oq8o
+================================================================================
+Loading BGE Reranker...
+Traceback (most recent call last):
+  File "C:\Users\anant\Desktop\projects\youtube_rag\tests\test_hybrid_reranker.py", line 107, in <module>
+    main()
+  File "C:\Users\anant\Desktop\projects\youtube_rag\tests\test_hybrid_reranker.py", line 50, in main
+    reranker = RerankerService()
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\src\services\reranker_service.py", line 12, in __init__
+    self.model = CrossEncoder(RERANKER_MODEL)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\sentence_transformers\util\decorators.py", line 160, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\sentence_transformers\cross_encoder\model.py", line 186, in __init__
+    super().__init__(
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\sentence_transformers\base\model.py", line 216, in __init__
+    modules, self.module_kwargs = self._load_modules(
+                                  ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\sentence_transformers\base\model.py", line 991, in _load_modules
+    return self._load_default_modules(model_name_or_path, **load_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\sentence_transformers\cross_encoder\model.py", line 272, in _load_default_modules
+    transformer_model = Transformer(
+                        ^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\sentence_transformers\util\decorators.py", line 87, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\sentence_transformers\base\modules\transformer.py", line 654, in __init__
+    self.model = self._load_model(
+                 ^^^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\sentence_transformers\base\modules\transformer.py", line 1736, in _load_model
+    return model_cls.from_pretrained(model_name_or_path, config=config, **model_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\transformers\models\auto\auto_factory.py", line 402, in from_pretrained
+    return model_class.from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\transformers\modeling_utils.py", line 4368, in from_pretrained
+    loading_info, disk_offload_index = cls._load_pretrained_model(model, state_dict, checkpoint_files, load_config)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\transformers\modeling_utils.py", line 4490, in _load_pretrained_model
+    file_pointer = safe_open(file, framework="pt", device=device, backend=backend)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: The paging file is too small for this operation to complete. (os error 1455)
+
+=== test_hybrid_retriever.py ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+System.Management.Automation.RemoteException
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 391/391 [00:00<00:00, 5187.26it/s]
+================================================================================
+VIDEOS STORED IN CHROMA
+================================================================================
+UPtG_38Oq8o
+================================================================================
+================================================================================
+Retrieved 5 unique chunks
+================================================================================
+
+Chunk 1
+{'video_id': 'UPtG_38Oq8o', 'end_time': 1263.76, 'start_time': 1230.559, 'chunk_id': 'UPtG_38Oq8o_43'}
+
+attention step is applied many times. So if you apply it many times at the end the words are going to end up much much closer to what is dictating the context in that piece of text. And in a nutshell that is what attention is doing. [Music] So now we're ready to learn the keys queries and values mat
+--------------------------------------------------------------------------------
+
+Chunk 2
+{'end_time': 31.359, 'chunk_id': 'UPtG_38Oq8o_0', 'video_id': 'UPtG_38Oq8o', 'start_time': 0.0}
+
+[Music] Hello, my name is Louisis Srano and in this video you're going to learn about the math behind attention mechanisms in large language models. Attention mechanisms are really important in large language models. As a matter of fact, they're one of the key steps that make transformers work reall
+--------------------------------------------------------------------------------
+
+Chunk 3
+{'video_id': 'UPtG_38Oq8o', 'start_time': 29.199, 'chunk_id': 'UPtG_38Oq8o_1', 'end_time': 59.28}
+
+this video, we're going to do an example in much more detail with all the math involved. Now, as I mentioned before, the concept of a transformer and the attention mechanism were introduced in this groundbreaking paper called attention is all you need. Now, this is a series of three videos. In the f
+--------------------------------------------------------------------------------
+
+Chunk 4
+{'video_id': 'UPtG_38Oq8o', 'end_time': 2035.44, 'start_time': 2002.399, 'chunk_id': 'UPtG_38Oq8o_70'}
+
+imagine training a humongous neural network and the neural network has inside a bunch of key query and value matrices that get trained as the neural network gets trained to guess the next word. But I'm getting into the next video. This is what we're going to learn on the third video of this series. 
+--------------------------------------------------------------------------------
+
+Chunk 5
+{'chunk_id': 'UPtG_38Oq8o_2', 'start_time': 58.0, 'video_id': 'UPtG_38Oq8o', 'end_time': 90.24}
+
+this video in particular, you're going to learn about some concepts. Similarity between words and pieces of text is one of the concepts. One way to do this is with dotproduct and another one with cosine similarity. So we'll learn both. And next you're going to learn what the key query and value matr
+--------------------------------------------------------------------------------
+
+=== test_ingestion_chain.py ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+================================================================================
+CHROMA PATH
+C:\Users\anant\Desktop\projects\youtube_rag\data\chroma_db
+================================================================================
+System.Management.Automation.RemoteException
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights:  60%|#####9    | 233/391 [00:00<00:00, 2315.70it/s]
+Loading weights: 100%|##########| 391/391 [00:00<00:00, 2934.21it/s]
+Traceback (most recent call last):
+  File "C:\Users\anant\Desktop\projects\youtube_rag\tests\test_ingestion_chain.py", line 51, in <module>
+    main()
+  File "C:\Users\anant\Desktop\projects\youtube_rag\tests\test_ingestion_chain.py", line 39, in main
+    ingestion_chain = IngestionChain(
+                      ^^^^^^^^^^^^^^^
+TypeError: IngestionChain.__init__() missing 2 required positional arguments: 'chunk_service' and 'indexing_service'
+
+=== test_llm_service.py ===
+Language model loaded successfully.
+Traceback (most recent call last):
+  File "C:\Users\anant\Desktop\projects\youtube_rag\tests\test_llm_service.py", line 33, in <module>
+    main()
+  File "C:\Users\anant\Desktop\projects\youtube_rag\tests\test_llm_service.py", line 17, in main
+    answer = llm_service.generate(prompt)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\src\services\llm_service.py", line 32, in generate
+    response = self.llm.invoke(prompt)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1849, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1656, in generate
+    self._generate_with_cache(
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1994, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1200, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1135, in _chat_stream_with_aggregation
+    for chunk in self._iterate_over_stream(messages, stop, **kwargs):
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1224, in _iterate_over_stream
+    for stream_resp in self._create_chat_stream(messages, stop, **kwargs):
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1122, in _create_chat_stream
+    yield from self._client.chat(**chat_params)
+  File "C:\Users\anant\Desktop\projects\youtube_rag\.venv\Lib\site-packages\ollama\_client.py", line 189, in inner
+    raise ResponseError(e.response.text, e.response.status_code) from None
+ollama._types.ResponseError: llama-server process has terminated: exit status 1: ggml_backend_cpu_buffer_type_alloc_buffer: failed to allocate buffer of size 2879938560
+alloc_tensor_range: failed to allocate CUDA_Host buffer of size 2879938560
+error loading model: unable to allocate CUDA_Host buffer (status code: 500)
+
+=== test_prompt_service.py ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+System.Management.Automation.RemoteException
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 391/391 [00:00<00:00, 6477.19it/s]
+
+=== test_reranker_service.py ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+=== test_retrieval_chain.py ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+System.Management.Automation.RemoteException
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 391/391 [00:00<00:00, 5394.17it/s]
+
+=== test_transcript_service.py ===
+Language: en
+Segments: 61
+
+Traceback (most recent call last):
+  File "C:\Users\anant\Desktop\projects\youtube_rag\tests\test_transcript_service.py", line 25, in <module>
+    main()
+  File "C:\Users\anant\Desktop\projects\youtube_rag\tests\test_transcript_service.py", line 21, in main
+    print(transcript[:5])
+          ~~~~~~~~~~^^^^
+TypeError: unhashable type: 'slice'
+
+=== test_video_exists.py ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+System.Management.Automation.RemoteException
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 391/391 [00:00<00:00, 6601.83it/s]
+Video not indexed.
+
+=== test_whoosh_search.py ===
+================================================================================
+Retrieved 5 documents
+================================================================================
+{'chunk_id': 'UPtG_38Oq8o_43', 'video_id': 'UPtG_38Oq8o', 'start_time': 1230.559, 'end_time': 1263.76}
+
+attention step is applied many times. So if you apply it many times at the end the words are going to end up much much closer to what is dictating the context in that piece of text. And in a nutshell that is what attention is doing. [Music] So now we're ready to learn the keys queries and values mat
+------------------------------------------------------------
+{'chunk_id': 'UPtG_38Oq8o_69', 'video_id': 'UPtG_38Oq8o', 'start_time': 1973.36, 'end_time': 2004.48}
+
+in the next video, but the idea is that these key query and value matrices get trained with the transformer model. Here's a transformer model and you can see that multi head attention appears several times. I like to simplify this diagram into this diagram over here where you have several steps toke
+------------------------------------------------------------
+{'chunk_id': 'UPtG_38Oq8o_1', 'video_id': 'UPtG_38Oq8o', 'start_time': 29.199, 'end_time': 59.28}
+
+this video, we're going to do an example in much more detail with all the math involved. Now, as I mentioned before, the concept of a transformer and the attention mechanism were introduced in this groundbreaking paper called attention is all you need. Now, this is a series of three videos. In the f
+------------------------------------------------------------
+{'chunk_id': 'UPtG_38Oq8o_0', 'video_id': 'UPtG_38Oq8o', 'start_time': 0.0, 'end_time': 31.359}
+
+[Music] Hello, my name is Louisis Srano and in this video you're going to learn about the math behind attention mechanisms in large language models. Attention mechanisms are really important in large language models. As a matter of fact, they're one of the key steps that make transformers work reall
+------------------------------------------------------------
+{'chunk_id': 'UPtG_38Oq8o_70', 'video_id': 'UPtG_38Oq8o', 'start_time': 2002.399, 'end_time': 2035.44}
+
+imagine training a humongous neural network and the neural network has inside a bunch of key query and value matrices that get trained as the neural network gets trained to guess the next word. But I'm getting into the next video. This is what we're going to learn on the third video of this series. 
+------------------------------------------------------------
+
+=== test_whoosh_service.py ===
+Indexed 98 chunks.
+
+=== test_youtube_service.py ===
+WARNING: [youtube] No supported JavaScript runtime could be found. Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one
+WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies
+Valid URL: True
+Video ID: dQw4w9WgXcQ
+{'video_id': 'dQw4w9WgXcQ', 'title': 'Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)', 'channel': 'Rick Astley', 'duration': 213, 'thumbnail': 'https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg', 'view_count': 1793949087}

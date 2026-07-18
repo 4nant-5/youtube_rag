@@ -6,23 +6,27 @@ class TranscriptService:
 
     @staticmethod
     def get_transcript(video_id: str):
-
-        api = YouTubeTranscriptApi()
-
-        transcript_list = api.list(video_id)
-
-        # Prefer manually created transcript
         try:
-            transcript = transcript_list.find_manually_created_transcript(
-                [t.language_code for t in transcript_list]
-            )
-        except Exception:
-            # Otherwise use auto-generated transcript
-            transcript = transcript_list.find_generated_transcript(
-                [t.language_code for t in transcript_list]
-            )
+            api = YouTubeTranscriptApi()
 
-        return {
-            "language": transcript.language_code,
-            "transcript": transcript.fetch().to_raw_data(),
-        }
+            transcript_list = api.list(video_id)
+
+            # Prefer manually created transcript
+            try:
+                transcript = transcript_list.find_manually_created_transcript(
+                    [t.language_code for t in transcript_list]
+                )
+            except Exception:
+                # Otherwise use auto-generated transcript
+                transcript = transcript_list.find_generated_transcript(
+                    [t.language_code for t in transcript_list]
+                )
+
+            return {
+                "language": transcript.language_code,
+                "transcript": transcript.fetch().to_raw_data(),
+            }
+
+        except Exception as exc:
+            # Surface a clear error for callers to handle
+            raise RuntimeError(f"Transcript unavailable for video {video_id}: {exc}") from exc

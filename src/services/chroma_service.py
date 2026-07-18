@@ -13,6 +13,8 @@ class ChromaService:
 
     def __init__(self, embedding_model):
 
+        CHROMA_DB_PATH.mkdir(parents=True, exist_ok=True)
+
         self.vector_store = Chroma(
             collection_name=COLLECTION_NAME,
             embedding_function=embedding_model,

@@ -8,14 +8,22 @@ from src.services.indexing_service import IndexingService
 
 class IngestionChain:
 
-    def __init__(self,indexing_service: IndexingService):
+    def __init__(
+        self,
+        transcript_service: TranscriptService,
+        chunk_service: ChunkService,
+        indexing_service: IndexingService,
+    ):
 
+        self.transcript_service = transcript_service
+        self.chunk_service = chunk_service
         self.indexing_service = indexing_service
-        self.chunk_service = ChunkService()
 
     def invoke(self, youtube_url: str):
-
         video_id = YouTubeService.extract_video_id(youtube_url)
+
+        if not video_id:
+            raise ValueError("Invalid YouTube URL or missing video id")
 
         if self.indexing_service.video_exists(video_id):
 
@@ -26,18 +34,18 @@ class IngestionChain:
                 "chunks_indexed": self.indexing_service.get_indexed_chunk_count(video_id),
             }
 
-        transcript_data = TranscriptService.get_transcript(video_id)
+        # Fetch transcript and fail fast if unavailable
+        transcript_data = self.transcript_service.get_transcript(video_id)
 
         transcript = transcript_data["transcript"]
+        language = transcript_data.get("language")
 
         document = DocumentService.transcript_to_documents(
             transcript,
             video_id,
         )
 
-        chunks = ChunkService().split_documents(
-            document
-        )
+        chunks = self.chunk_service.split_documents(document)
 
         self.indexing_service.index_documents(chunks)
 
@@ -46,4 +54,5 @@ class IngestionChain:
             "video_id": video_id,
             "already_indexed": False,
             "chunks_indexed": len(chunks),
+            "language": language,
         }

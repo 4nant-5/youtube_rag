@@ -1,3 +1,9 @@
+import logging
+
+
+logger = logging.getLogger(__name__)
+
+
 class GenerationChain:
 
     def __init__(
@@ -18,19 +24,31 @@ class GenerationChain:
         response_language: str,
     ) -> str:
 
-        documents = self.retrieval_chain.retrieve(
-            question,
-            video_id,
-        )
+        try:
+            documents = self.retrieval_chain.invoke(
+                question,
+                video_id,
+            )
+        except Exception as exc:
+            logger.exception("Retrieval failed: %s", exc)
+            raise
 
-        prompt = self.prompt_service.build_prompt(
-            question=question,
-            documents=documents,
-            response_language=response_language,
-        )
+        try:
+            prompt = self.prompt_service.build_prompt(
+                question=question,
+                documents=documents,
+                response_language=response_language,
+            )
+        except Exception as exc:
+            logger.exception("Prompt building failed: %s", exc)
+            raise
 
-        answer = self.llm_service.generate(
-            prompt,
-        )
+        try:
+            answer = self.llm_service.generate(
+                prompt,
+            )
+        except Exception as exc:
+            logger.exception("LLM generation failed: %s", exc)
+            raise
 
         return answer
