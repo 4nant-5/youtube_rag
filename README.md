@@ -46,32 +46,26 @@ Modular AI Pipelines
 
 ## System Architecture
 
-YouTube URL
-      │
-      ▼
-Transcript Extraction
-      │
-      ▼
-Text Chunking
-      │
-      ▼
-Embedding Generation
-      │
- ┌────┴────┐
- ▼         ▼
-Chroma    BM25
- │          │
- └────┬─────┘
-      ▼
-Hybrid Retrieval
-      ▼
-Cross Encoder Reranker
-      ▼
-Prompt Builder
-      ▼
-Ollama LLM
-      ▼
-Answer Generation
+```mermaid
+flowchart TD
+
+    A["YouTube Video URL"] --> B["Transcript Extraction"]
+    B --> C["Recursive Text Chunking"]
+    C --> D["Nomic Embed Text"]
+
+    D --> E["ChromaDB<br/>(Vector Index)"]
+    D --> F["Whoosh<br/>(BM25 Index)"]
+
+    E --> G["Hybrid Retriever"]
+    F --> G
+
+    H["User Query"] --> G
+
+    G --> I["BGE Cross-Encoder<br/>Reranker"]
+    I --> J["Prompt Builder"]
+    J --> K["Ollama<br/>(Gemma / Qwen)"]
+    K --> L["Streamlit UI"]
+```
 
 ## How It Works
 
