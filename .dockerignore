@@ -1,0 +1,40 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python cache
+.mypy_cache/
+.ruff_cache/
+
+# Local indexes (Docker volumes will handle these)
+data/chroma_db/
+data/whoosh_index/
+
+# Streamlit cache
+.streamlit/cache/
+
+# Misc
+README.md

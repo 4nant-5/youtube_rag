@@ -38,15 +38,16 @@ class LLMService:
 
         return self.model_available
 
-    def generate(
-        self,
-        prompt: str,
-    ) -> str:
+    def generate(self,prompt: str,) -> str:
+        print(">>> LLMService.generate() called")
+        print(f">>> Base URL: {OLLAMA_BASE_URL}")
+        print(f">>> Model: {OLLAMA_MODEL}")
         """
         Generate a response from the LLM.
         """
 
         if not self._initialize():
+            print(">>> Initializing ChatOllama")
             return self._fallback_answer()
 
         try:

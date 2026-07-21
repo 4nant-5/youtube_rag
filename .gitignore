@@ -5,6 +5,8 @@ build/
 dist/
 wheels/
 *.egg-info
+.python-version
+src/__pycache__/
 
 # Virtual environments
 .venv
